@@ -1,0 +1,25 @@
+== README
+
+Steps necessary to get the application up and running.
+
+* Ruby version
+
+developed on ruby 2.1.1p76 though ruby >= 1.9.3 will do (basically any version compatible with rails 4)
+
+* System dependencies
+
+ruby, rubygems, bundler
+
+* Configuration
+
+bundler install
+
+* Database creation and initialization
+
+rake db:migrate
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
