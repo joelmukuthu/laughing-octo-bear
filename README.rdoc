@@ -9,6 +9,7 @@ developed on ruby 2.1.1p76 though ruby >= 1.9.3 will do (basically any version c
 * System dependencies
 
 ruby, rubygems, bundler
+sendmail - for sending emails in development environment
 
 * Configuration
 

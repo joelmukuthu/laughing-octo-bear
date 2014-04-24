@@ -1,0 +1,17 @@
+@import "bootstrap";
+
+body {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.alert-notice {
+  @extend .alert-info;
+}
+
+.alert-alert {
+  @extend .alert-warning;
+}
+
+.alert-error {
+  @extend .alert-danger;
+}
