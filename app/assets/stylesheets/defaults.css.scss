@@ -1,3 +1,4 @@
+
 @import "bootstrap";
 
 body {
@@ -14,4 +15,10 @@ body {
 
 .alert-error {
   @extend .alert-danger;
+}
+
+.reset-ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }

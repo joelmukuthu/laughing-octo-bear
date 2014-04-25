@@ -8,5 +8,12 @@
   <%= @mission.description %>
 </p>
 
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @mission.image.url if @mission.image? %>
+</p>
+
+<% if can_update_mission? @mission %>
 <%= link_to 'Edit', edit_mission_path(@mission) %> |
+<% end %>
 <%= link_to 'Back', missions_path %>

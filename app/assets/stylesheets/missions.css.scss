@@ -1,3 +1,24 @@
 // Place all the styles related to the missions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "defaults";
+
+.missions {
+  @extend .container-fluid;
+
+  ul {
+    @extend .row;
+    @extend .reset-ul;
+  }
+
+  li {
+    @extend .col-md-3;
+    text-align: center;
+  }
+
+  img {
+    @extend .img-rounded;
+    @extend .img-responsive;
+  }
+}

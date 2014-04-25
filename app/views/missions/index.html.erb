@@ -1,27 +1,41 @@
 <h1>Listing missions</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="missions">
 
-  <tbody>
-    <% @missions.each do |mission| %>
-      <tr>
-        <td><%= mission.title %></td>
-        <td><%= mission.description %></td>
-        <td><%= link_to 'Show', mission %></td>
-        <td><%= link_to 'Edit', edit_mission_path(mission) %></td>
-        <td><%= link_to 'Destroy', mission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <% if @missions.any? %>
 
-<br>
+  <p><%= link_to 'New Mission', new_mission_path if user_signed_in? %></p>
 
-<%= link_to 'New Mission', new_mission_path %>
+  <ul>
+
+  <% @missions.each_with_index do |mission, index| %>
+
+    <li>
+      <%= image_tag mission.image.url if mission.image? %>
+      <p><%= mission.title %></p>
+      <p><%= mission.description %></p>
+      <% if user_signed_in? %>
+        <p>
+          <%= link_to 'Show', mission %> 
+
+          <% if can_update_mission? mission %>
+          | <%= link_to 'Edit', edit_mission_path(mission) %> 
+          | <%= link_to 'Destroy', mission, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </p>
+      <% end %>
+    </li>
+
+    <%= raw '</ul><ul>' if (index + 1) % 4 === 0 %>
+
+  <% end %>
+
+  </ul>
+
+  <% else %>
+
+  <p>There are no missions yet. <%= link_to 'New Mission', new_mission_path if can_update_missions? %></p>
+
+  <% end %>
+
+</div>
