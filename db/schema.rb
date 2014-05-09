@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424234213) do
+ActiveRecord::Schema.define(version: 20140426163926) do
 
   create_table "identities", force: true do |t|
     t.integer  "user_id"
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 20140424234213) do
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id"
+
+  create_table "messages", force: true do |t|
+    t.text     "body"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.boolean  "deleted_by_sender",    default: false
+    t.boolean  "deleted_by_recipient", default: false
+    t.datetime "read_at"
+    t.integer  "reply_to"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "missions", force: true do |t|
     t.string   "title"
