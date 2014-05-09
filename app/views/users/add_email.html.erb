@@ -1,0 +1,16 @@
+<h1>Confirm your email</h1>
+
+<%= form_for current_user, as: 'user', url: add_user_email_path(current_user) do |f| %>
+  
+  <%= render 'partials/form_errors', item: current_user %>
+
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+<% end %>

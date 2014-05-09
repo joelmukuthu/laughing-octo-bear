@@ -6,9 +6,7 @@ class Identity < ActiveRecord::Base
 
   def self.find_for_oauth(auth)
     identity = find_by(provider: auth.provider, uid: auth.uid)
-    if identity.nil?
-      identity = create(uid: auth.uid, provider: auth.provider) 
-    end
+    identity = create(uid: auth.uid, provider: auth.provider) if identity.nil?
     identity
   end
 end
