@@ -1,6 +1,30 @@
 
 @import "bootstrap";
 
+@mixin absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: absolute;
+  @if $top != auto { top: $top; }
+  @if $right != auto { right: $right; }
+  @if $bottom != auto { bottom: $bottom; }
+  @if $left != auto { left: $left; }
+}
+
+@mixin absolute-top-left($top: 0, $left: 0) {
+  @include absolute($top, auto, auto, $left);
+}
+
+@mixin absolute-top-right($top: 0, $right: 0) {
+  @include absolute($top, $right, auto, auto);
+}
+
+@mixin absolute-bottom-right($bottom: 0, $right: 0) {
+  @include absolute(auto, $right, $bottom, auto);
+}
+
+@mixin absolute-bottom-left($bottom: 0, $left: 0) {
+  @include absolute(auto, auto, $bottom, $left);
+}
+
 body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -21,4 +45,28 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+form {
+
+  .field {
+    @extend .form-group;
+  }
+
+  input[type="text"], textarea {
+    @extend .form-control;
+  }
+
+  .actions {
+    @extend .clearfix;
+  }
+
+  input[type="submit"] {
+    @extend .btn;
+    float: right;
+  }
+
+  button {
+    @extend .btn;
+  }
 }

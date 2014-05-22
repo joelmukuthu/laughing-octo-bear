@@ -20,4 +20,26 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  missions:
+    form:
+      new_mission: New mission form
+      vision: Mission vision goes here
+      picture: A picture tells a thousand words and makes your mission concrete
+      file_api_unsupported: Your browser does not support image previews but %{filename} will be uploaded
+      add_image: Add image
+      remove_image: Remove image
+      remove_image_confirm: 'Remove this image: %{filename}?'
+      change_image: Change image
+      category: Category
+      location: Location
+      deadline: Deadline
+      reason: Reason (optional)
+      privacy: Privacy
+      who_can_sponsor: Who can sponsor this mission?
+      who_can_sponsor1: Any %{site_name} user
+      who_can_sponsor2: Invited friends only
+      who_can_see_my_name: Who can see my name along with this mission?
+      who_can_see_my_name1: Any %{site_name} user
+      who_can_see_my_name2: Sponsors only
+      cancel: Cancel
+      start: Start mission

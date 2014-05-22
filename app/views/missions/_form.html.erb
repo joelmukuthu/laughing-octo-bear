@@ -1,27 +1,39 @@
-<%= form_for(@mission) do |f| %>
+<%= form_for @mission, html: { role: 'form' } do |f| %>
 
   <%= render 'partials/form_errors', item: @mission %>
 
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, placeholder: t('missions.form.vision') %>
   </div>
-  <div class="field">
-    <%= f.label :image %><br>
-    <%= image_tag @mission.image.url if @mission.image? %>
+
+  <div class="field image_field" id="image_field">
+    <% if @mission.image? %>
+      <%= image_tag @mission.image.url %>
+      <%= f.label t('missions.form.picture'), style: 'display: none', 'data-unsupported' => t('missions.form.file_api_unsupported') %>
+      <div class="buttons">
+        <button id="remove_image" data-message="<%= t('missions.form.remove_image_confirm') %>"><%= t('missions.form.remove_image') %></button>
+        <button id="change_image"><%= t('missions.form.change_image') %></button>
+        <button id="add_image" style="display: none"><%= t('missions.form.add_image') %></button>
+      </div>
+      <%= f.check_box :remove_image %>
+    <% else %>
+      <%= f.label t('missions.form.picture'), 'data-unsupported' => t('missions.form.file_api_unsupported') %>
+      <%= image_tag '#', style: 'display: none' %>
+      <div class="buttons">
+        <button id="remove_image" data-message="<%= t('missions.form.remove_image_confirm') %>"><%= t('missions.form.remove_image') %></button>
+        <button id="change_image" style="display: none"><%= t('missions.form.change_image') %></button>
+        <button id="add_image"><%= t('missions.form.add_image') %></button>
+      </div>
+    <% end %>
     <%= f.file_field :image %>
     <%= f.hidden_field :image_cache %>
   </div>
-  <% if @mission.image? %>
-  <p>
-    <%= f.label :remove_image %><br>
-    <%= f.check_box :remove_image %>
-  </p>
-  <% end %>
+  <p class="help-block" id="chosen_image"><%= File.basename @mission.image.path if @mission.image? %></p>
+
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, rows: 1, placeholder: t('missions.form.reason') %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

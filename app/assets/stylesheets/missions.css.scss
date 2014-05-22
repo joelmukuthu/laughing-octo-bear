@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// $border-radius-base: 0;
+
 @import "defaults";
 
 .missions {
@@ -20,5 +22,58 @@
   img {
     @extend .img-rounded;
     @extend .img-responsive;
+  }
+}
+
+form.new_mission, form.edit_mission {
+  $form-border: 1px $input-border solid;
+  @extend .row-fluid;
+
+  padding: 10px;
+  border: $form-border;
+  border-radius: $border-radius-base;
+
+  .image_field {
+    $height: 200px;
+
+    border: $form-border;
+    height: $height;
+    position: relative;
+    border-radius: $border-radius-base;
+
+    label {
+      @include absolute-top-left;
+      color: $input-color-placeholder;
+      line-height: $height;
+      font-weight: normal;
+      padding-left: 12px;
+      font-size: 14px;
+    }
+
+    img {
+      @include absolute-top-left;
+      height: $height;
+      width: 100%;
+      border-radius: $border-radius-base;
+    }
+
+    .buttons {
+      width: 100%;
+      @extend .clearfix;
+      @include absolute-bottom-right(10px);
+
+      button {
+        float: right;
+        margin-right: 10px;
+      }
+    }
+
+    #mission_image, #mission_remove_image {
+      display: none;
+    }
+  }
+
+  #chosen_image {
+    text-align: right;
   }
 }
