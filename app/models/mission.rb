@@ -3,7 +3,7 @@ class Mission < ActiveRecord::Base
     ['Lifestyle', 0]
   ]
 
-  validates :title, presence: true
+  validates_presence_of :title, :category_id
 
   mount_uploader :image, ImageUploader
 
