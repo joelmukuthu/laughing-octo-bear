@@ -18,7 +18,7 @@
       <%= f.check_box :remove_image %>
     <% else %>
       <%= f.label t('missions.form.picture'), 'data-unsupported' => t('missions.form.file_api_unsupported') %>
-      <%= image_tag '#', style: 'display: none' %>
+      <img style="display: none" src="#" alt="">
       <div class="buttons">
         <button id="remove_image" data-message="<%= t('missions.form.remove_image_confirm') %>"><%= t('missions.form.remove_image') %></button>
         <button id="change_image" style="display: none"><%= t('missions.form.change_image') %></button>
@@ -28,7 +28,22 @@
     <%= f.file_field :image %>
     <%= f.hidden_field :image_cache %>
   </div>
-  <p class="help-block" id="chosen_image"><%= File.basename @mission.image.path if @mission.image? %></p>
+  <p class="help" id="chosen_image"><%= @mission.image? ? File.basename(@mission.image.path) : t('missions.form.allowed_image_types') %></p>
+
+  <div class="field-row">
+    <div class="category">
+      <span><i></i></span>
+      <%= f.select :category_id, Mission::CATEGORIES, prompt: t('missions.form.category') %>
+    </div>
+    <div class="location">
+      <span><i></i></span>
+      <%= f.text_field :location, placeholder: t('missions.form.location') %>
+    </div>
+    <div class="deadline">
+      <span><i></i></span>
+      <%= f.text_field :deadline, placeholder: t('missions.form.deadline'), id: 'deadline' %>
+    </div>
+  </div>
 
   <div class="field">
     <%= f.text_area :description, rows: 1, placeholder: t('missions.form.reason') %>
@@ -37,4 +52,20 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+<% end %>
+
+<%= content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'datepicker-1.3.0', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= content_for :javascripts do %>
+  <%= javascript_include_tag 'bootstrap-datepicker-1.3.0', 'data-turbolinks-track' => true %>
+  <script data-turbolinks-track="true">
+    $(function () {
+      $('#deadline').datepicker({
+        format: "dd.mm.yyyy",
+        autoclose: true
+      });
+    });
+  </script>
 <% end %>

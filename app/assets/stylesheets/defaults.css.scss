@@ -53,7 +53,7 @@ form {
     @extend .form-group;
   }
 
-  input[type="text"], textarea {
+  input[type="text"], textarea, select {
     @extend .form-control;
   }
 
@@ -68,5 +68,9 @@ form {
 
   button {
     @extend .btn;
+  }
+
+  .help {
+    @extend .help-block;
   }
 }

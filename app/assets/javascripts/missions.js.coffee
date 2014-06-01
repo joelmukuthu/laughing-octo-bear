@@ -13,6 +13,7 @@ $ ->
   imageLabel = $('label', imageFieldDiv)
   chosenImageText = $('#chosen_image')
   imageType = /image.*/
+  allowedImageTypes = ['.jpg', '.png', '.jpeg']
 
   imageLabel.data 'original', imageLabel.text()
 
@@ -58,6 +59,11 @@ $ ->
   imageField.change ->
     filename = imageField.val().split('\\').pop()
     return if !filename
+    valid = $.inArray(filename.substring(filename.lastIndexOf('.')), allowedImageTypes) > -1
+    # TODO: display error to user
+    if !valid
+      resetFormElement imageField
+      return
     removeImageCheck.prop 'checked', false
     chosenImageText.text filename
     if window.File and window.FileReader
@@ -70,7 +76,8 @@ $ ->
           image.show()
         reader.readAsDataURL file
       else
-          console.log 'invalid file type'
+        # TODO: display error to user
+        console.log 'invalid file type'
     else
       imageLabel.text imageLabel.data('unsupported').replace('%{filename}', filename)
                 .show()

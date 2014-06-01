@@ -42,12 +42,12 @@ form.new_mission, form.edit_mission {
     border-radius: $border-radius-base;
 
     label {
-      @include absolute-top-left;
+      @include absolute-top-left(50%);
       color: $input-color-placeholder;
-      line-height: $height;
       font-weight: normal;
       padding-left: 12px;
       font-size: 14px;
+      margin-top: -10px;
     }
 
     img {
@@ -75,5 +75,35 @@ form.new_mission, form.edit_mission {
 
   #chosen_image {
     text-align: right;
+  }
+
+  .field-row {
+    @extend .row;
+
+    .category, .location, .deadline {
+      @extend .col-md-4;
+      @extend .input-group;
+      margin-bottom: 15px;
+
+      span {
+        @extend .input-group-addon;
+      }
+
+      i {
+        @extend .glyphicon;
+      }
+    }
+
+    .category i {
+      @extend .glyphicon-list-alt;
+    }
+
+    .location i {
+      @extend .glyphicon-send;
+    }
+
+    .deadline i {
+      @extend .glyphicon-calendar;
+    }
   }
 }

@@ -23,16 +23,17 @@ en:
   missions:
     form:
       new_mission: New mission form
-      vision: Mission vision goes here
-      picture: A picture tells a thousand words and makes your mission concrete
+      vision: Mission vision goes here (required)
+      picture: A picture tells a thousand words and makes your mission concrete (optional)
       file_api_unsupported: Your browser does not support image previews but %{filename} will be uploaded
       add_image: Add image
+      allowed_image_types: 'Allowed types: jpg, jpeg and png'
       remove_image: Remove image
       remove_image_confirm: 'Remove this image: %{filename}?'
       change_image: Change image
-      category: Category
-      location: Location
-      deadline: Deadline
+      category: Category (required)
+      location: Location (optional)
+      deadline: Deadline (optional)
       reason: Reason (optional)
       privacy: Privacy
       who_can_sponsor: Who can sponsor this mission?
