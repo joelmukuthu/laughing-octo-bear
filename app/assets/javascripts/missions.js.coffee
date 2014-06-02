@@ -24,11 +24,11 @@ $ ->
   removeImageButton.click (e) ->
     e.preventDefault()
     BootstrapDialog.show
-      title: 'Confirm'
+      title: 'Confirm' # TODO: move to locale file
       message: removeImageButton.data('message').replace('%{filename}', chosenImageText.text())
       buttons: [
         {
-          label: 'Yes'
+          label: 'Yes' # TODO: move to locale file
           action: (dialog) ->
             image.hide()
             removeImageButton.hide()
@@ -42,7 +42,7 @@ $ ->
             dialog.close()
         }, 
         {
-          label: 'No'
+          label: 'No' # TODO: move to locale file
           action: (dialog) ->
             dialog.close()
         }

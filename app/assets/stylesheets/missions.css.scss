@@ -77,6 +77,14 @@ form.new_mission, form.edit_mission {
     text-align: right;
   }
 
+  .title {
+    margin: 0 -10px 25px;
+    padding: 10px;
+    border: $form-border;
+    border-width: 1px 0;
+    color: $input-color-placeholder;
+  }
+
   .field-row {
     @extend .row;
 
@@ -104,6 +112,19 @@ form.new_mission, form.edit_mission {
 
     .deadline i {
       @extend .glyphicon-calendar;
+    }
+
+    .radio_label {
+      @extend .col-md-6;
+      // text-align: right;
+    }
+
+    label {
+      @extend .radio-inline;
+      @extend .col-xs-3;
+      margin-right: -10px;
+      font-weight: normal;
+      color: $input-color-placeholder;
     }
   }
 }

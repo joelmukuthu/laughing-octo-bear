@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601164540) do
+ActiveRecord::Schema.define(version: 20140601233207) do
 
   create_table "identities", force: true do |t|
     t.integer  "user_id"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20140601164540) do
     t.integer  "category_id"
     t.string   "location"
     t.date     "deadline"
+    t.integer  "who_can_sponsor"
+    t.integer  "who_can_see_my_name"
   end
 
   add_index "missions", ["user_id"], name: "index_missions_on_user_id"
