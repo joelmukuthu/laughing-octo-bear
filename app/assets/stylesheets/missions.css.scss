@@ -121,10 +121,27 @@ form.new_mission, form.edit_mission {
 
     label {
       @extend .radio-inline;
-      @extend .col-xs-3;
       margin-right: -10px;
       font-weight: normal;
       color: $input-color-placeholder;
+
+      &.first {
+        @extend .col-xs-6;
+        @extend .col-md-3;
+        @extend .col-xs-offset-1;
+        @extend .col-md-offset-0;
+      }
+
+      &.second {
+        @extend .col-xs-5;
+        @extend .col-md-3;
+      }
     }
+  }
+
+  .actions {
+    padding: 10px;
+    margin: 0 -10px;
+    border-top: $form-border;
   }
 }

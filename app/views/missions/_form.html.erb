@@ -55,11 +55,11 @@
 
   <div class="field field-row">
     <div class="radio_label"><%= t('missions.form.who_can_sponsor') %></div>
-    <label>
+    <label class="first">
       <%= f.radio_button :who_can_sponsor, Mission::ANYONE_CAN_SPONSOR, { checked: @mission.who_can_sponsor != Mission::ONLY_INVITED_FRIENDS_CAN_SPONSOR } %>
       <%= t('missions.form.anyone_can_sponsor') %>
     </label>
-    <label>
+    <label class="second">
       <%= f.radio_button :who_can_sponsor, Mission::ONLY_INVITED_FRIENDS_CAN_SPONSOR %>
       <%= t('missions.form.only_invited_friends_can_sponsor') %>
     </label>
@@ -67,11 +67,11 @@
 
   <div class="field field-row">
     <div class="radio_label"><%= t('missions.form.who_can_see_my_name') %></div>
-    <label>
+    <label class="first">
       <%= f.radio_button :who_can_see_my_name, Mission::ANYONE_CAN_SEE_MY_NAME, { checked: @mission.who_can_see_my_name != Mission::ONLY_SPONSORS_CAN_SEE_MY_NAME } %>
       <%= t('missions.form.anyone_can_see_my_name') %>
     </label>
-    <label>
+    <label class="second">
       <%= f.radio_button :who_can_see_my_name, Mission::ONLY_SPONSORS_CAN_SEE_MY_NAME %>
       <%= t('missions.form.only_sponsors_can_see_my_name') %>
     </label>
