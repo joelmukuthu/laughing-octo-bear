@@ -4,23 +4,19 @@
 
 // $border-radius-base: 0;
 
-@import "defaults";
+@import "global";
 
 .missions {
-  @extend .container-fluid;
-
   ul {
     @extend .row;
     @extend .reset-ul;
   }
 
   li {
-    @extend .col-md-3;
-    text-align: center;
+    @extend .col-xs-12;
   }
 
   img {
-    @extend .img-rounded;
     @extend .img-responsive;
   }
 }
