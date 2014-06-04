@@ -1,6 +1,6 @@
 class MissionsController < ApplicationController
   before_action :set_mission, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  before_action :authenticate_user!, only: [:show, :new, :edit, :create, :update, :destroy]
   before_action :set_categories, only: [:new, :edit]
 
   # GET /missions
@@ -12,7 +12,9 @@ class MissionsController < ApplicationController
   # GET /missions/1
   # GET /missions/1.json
   def show
-    impressionist @mission
+    # one has to be signed in to view a mission, so it's safe to use the session hash
+    # as a filter for unique views
+    impressionist @mission, "viewed by #{current_user.id}", :unique => [:session_hash]
   end
 
   # GET /missions/new

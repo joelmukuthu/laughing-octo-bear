@@ -20,9 +20,6 @@ class Mission < ActiveRecord::Base
   is_impressionable :counter_cache => true, :column_name => :views_cache
 
   def views
-    # one has to be signed in to view a mission, so it's safe to use the session hash as a filter
-    # for unique views
-    # TODO: instead should we only record unique views?
-    impressionist_count(:filter=>:session_hash)
+    self.views_cache
   end
 end
