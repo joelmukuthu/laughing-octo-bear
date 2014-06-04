@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603233202) do
+ActiveRecord::Schema.define(version: 20140604002610) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20140603233202) do
     t.date     "deadline"
     t.integer  "who_can_sponsor"
     t.integer  "who_can_see_my_name"
+    t.integer  "views_cache",         default: 0
   end
 
   add_index "missions", ["user_id"], name: "index_missions_on_user_id"
