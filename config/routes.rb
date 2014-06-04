@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :messages
-
   root 'home#index'
 
   devise_for :users, 
@@ -12,4 +10,8 @@ Rails.application.routes.draw do
         as: :add_user_email
 
   resources :missions
+
+  resources :messages
+  
+  resources :categories
 end

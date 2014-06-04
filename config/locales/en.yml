@@ -21,6 +21,10 @@
 
 en:
   missions:
+    by: by
+    ago: ago
+    views: view # is pluralized in code
+
     form:
       new_mission: New mission form
       vision: Mission vision goes here (required)

@@ -33,7 +33,7 @@
   <div class="field-row">
     <div class="category">
       <span><i></i></span>
-      <%= f.select :category_id, Mission::CATEGORIES, prompt: t('missions.form.category') %>
+      <%= f.select :category_id, @categories.collect {|c| [c.name, c.id] }, prompt: t('missions.form.category') %>
     </div>
     <div class="location">
       <span><i></i></span>

@@ -1,7 +1,7 @@
 class MissionsController < ApplicationController
   before_action :set_mission, only: [:show, :edit, :update, :destroy]
-
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  before_action :set_categories, only: [:new, :edit]
 
   # GET /missions
   # GET /missions.json
@@ -12,6 +12,7 @@ class MissionsController < ApplicationController
   # GET /missions/1
   # GET /missions/1.json
   def show
+    impressionist @mission
   end
 
   # GET /missions/new
@@ -27,7 +28,7 @@ class MissionsController < ApplicationController
   # POST /missions.json
   def create
     @mission = Mission.new(mission_params)
-    @mission.user = current_user
+    @mission.owner = current_user
 
     respond_to do |format|
       if @mission.save
@@ -68,6 +69,10 @@ class MissionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_mission
       @mission = Mission.find(params[:id])
+    end
+
+    def set_categories
+      @categories = Category.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

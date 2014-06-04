@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
             class_name: 'Message',
             foreign_key: 'sender_id'
 
+  has_many :identities
+
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
     # Get the identity and user if they exist

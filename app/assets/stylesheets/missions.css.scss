@@ -2,39 +2,110 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// $border-radius-base: 0;
+// $border-radius-base: 0; // if we wish to get rid of all the rounded corners
 
 @import "global";
 
+// variables used here
+// $border-radius-base: 0; // from bootstrap
+// $input-border // from bootstrap
+// $input-color-placeholder; // from bootstrap
+// $gray-light // from bootstrap
+// $gray // from bootstrap
+$mission-form-border: 1px $gray-light solid;
+$single-mission-border: 1px $gray-light solid;
+$image-field-height: 200px;
+
 .missions {
-  ul {
+  #missions {
     @extend .row;
     @extend .reset-ul;
-  }
 
-  li {
-    @extend .col-xs-12;
-  }
+    > li {
+      @extend .col-xs-12;
+      @extend .col-sm-6;
+      margin-bottom: 15px;
 
-  img {
-    @extend .img-responsive;
+      > div {
+        padding: 10px;
+        border: $single-mission-border;
+        border-radius: $border-radius-base;
+      }
+    }
+
+    h3 {
+
+    }
+
+    .meta {
+      color: $gray;
+
+      span {
+        margin-right: 5px;
+        display: inline-block;
+      }
+
+      .owner {
+        font-weight: bold;
+      }
+    }
+
+    .img {
+      margin: 0 -10px 10px;
+      
+      img {
+        @extend .img-responsive;
+      } 
+    }
+
+    .actions {
+      text-align: center;
+
+      button {
+        @extend .btn;
+        border-radius: 20px;
+        margin-right: 10px;
+      }
+
+      span {
+        @extend .glyphicon;
+      }
+
+      .torches span {
+        @extend .glyphicon-tree-deciduous;
+      }
+
+      .sponsors span {
+        @extend .glyphicon-user;
+      }
+
+      .shares {
+        margin-right: 0;
+
+        span {
+          @extend .glyphicon-share-alt;
+        }
+      }
+    }
+
+    .reason {
+      color: $gray;
+    }
   }
 }
 
 form.new_mission, form.edit_mission {
-  $form-border: 1px $input-border solid;
   @extend .row-fluid;
 
   padding: 10px;
-  border: $form-border;
+  border: $mission-form-border;
   border-radius: $border-radius-base;
 
   .image_field {
-    $height: 200px;
 
-    border: $form-border;
-    height: $height;
     position: relative;
+    border: 1px $input-border solid;
+    height: $image-field-height;
     border-radius: $border-radius-base;
 
     label {
@@ -48,7 +119,7 @@ form.new_mission, form.edit_mission {
 
     img {
       @include absolute-top-left;
-      height: $height;
+      height: $image-field-height;
       width: 100%;
       border-radius: $border-radius-base;
     }
@@ -76,7 +147,7 @@ form.new_mission, form.edit_mission {
   .title {
     margin: 0 -10px 25px;
     padding: 10px;
-    border: $form-border;
+    border: $mission-form-border;
     border-width: 1px 0;
     color: $input-color-placeholder;
   }
@@ -138,6 +209,6 @@ form.new_mission, form.edit_mission {
   .actions {
     padding: 10px;
     margin: 0 -10px;
-    border-top: $form-border;
+    border-top: $mission-form-border;
   }
 }

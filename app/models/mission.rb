@@ -1,7 +1,4 @@
 class Mission < ActiveRecord::Base
-  CATEGORIES = [
-    ['Lifestyle', 0]
-  ]
 
   ANYONE_CAN_SPONSOR = 1
   ONLY_INVITED_FRIENDS_CAN_SPONSOR = 2
@@ -13,5 +10,17 @@ class Mission < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  belongs_to :user
+  belongs_to :owner,
+              class_name: 'User',
+              foreign_key: 'user_id'
+
+  belongs_to :category
+
+  is_impressionable # record unique visits/views/impressions on an instance of Mission
+
+  def views
+    # one has to be signed in to view a mission, so it's safe to use the session hash as a filter
+    # for unique views
+    impressionist_count(:filter=>:session_hash)
+  end
 end

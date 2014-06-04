@@ -38,6 +38,9 @@ gem 'omniauth-linkedin'
 # image uploads
 gem 'carrierwave'
 
+# getting a mission's views
+gem 'impressionist'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

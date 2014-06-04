@@ -4,32 +4,56 @@
 
   <% if @missions.any? %>
 
-  <p><%= link_to 'New Mission', new_mission_path if user_signed_in? %></p>
+  <p><%= link_to 'New Mission', new_mission_path if can_create_missions? %></p>
 
-  <ul>
-
-  <% @missions.each_with_index do |mission, index| %>
-
+  <ul id="missions">
+    <% @missions.each_with_index do |mission| %>
     <li>
-      <%= image_tag mission.image.url if mission.image? %>
-      <p><%= mission.title %></p>
-      <p><%= mission.description %></p>
-      <% if user_signed_in? %>
-        <p>
-          <%= link_to 'Show', mission %> 
+      <div>
+        <h3><%= can_view_missions? ? link_to(mission.title, mission) : mission.title %></h3>
 
-          <% if can_update_mission? mission %>
-          | <%= link_to 'Edit', edit_mission_path(mission) %> 
-          | <%= link_to 'Destroy', mission, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <p class="meta">
+          <span class="owner"><%= t 'missions.by' %> <%= mission.owner.name %></span>
+          <% if mission.location? %>
+          <span class="location"><%= mission.location %></span>
           <% end %>
+          <span class="time"><%= time_ago_in_words mission.created_at %> <%= t 'missions.ago' %></span>
+          <span class="views"><%= pluralize mission.views, t('missions.views') %> </span>
+          <span class="category"><%= mission.category.name %></span>
         </p>
-      <% end %>
+
+        <% if mission.image? %>
+        <div class="img">
+          <% image = image_tag mission.image.url, alt: mission.title %>
+          <%= can_view_missions? ? link_to(image, mission) : image %>
+        </div>
+        <% end %>
+
+        <p class="actions">
+          <button class="torches">
+            <span></span> 0
+          </button>
+          <button class="sponsors">
+            <span></span> 0
+          </button>
+          <button class="shares">
+            <span></span> 0
+          </button>
+        </p>
+
+        <% if mission.description? %>
+        <p class="reason"><%= mission.description %></p>
+        <% end %>
+
+        <% if can_update_mission? mission %>
+        <p>
+          <%= link_to 'Edit', edit_mission_path(mission) %> |
+          <%= link_to 'Destroy', mission, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </p>
+        <% end %>
+      </div>
     </li>
-
-    <%= raw '</ul><ul>' if (index + 1) % 4 === 0 %>
-
-  <% end %>
-
+    <% end %>
   </ul>
 
   <% else %>

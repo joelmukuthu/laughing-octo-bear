@@ -29,6 +29,10 @@ body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+#content {
+  @extend .container;
+}
+
 .alert-notice {
   @extend .alert-info;
 }
