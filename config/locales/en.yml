@@ -24,6 +24,9 @@ en:
     by: by
     ago: ago
     views: view # is pluralized in code
+    edit: Edit
+    delete: Delete
+    delete_confirmation: Permanently delete this mission?
 
     form:
       new_mission: New mission form

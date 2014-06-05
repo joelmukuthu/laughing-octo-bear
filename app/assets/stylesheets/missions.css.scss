@@ -17,6 +17,11 @@ $single-mission-border: 1px $gray-light solid;
 $image-field-height: 200px;
 
 .missions {
+
+  .listed {
+    @extend .fixed-width;
+  }
+
   #missions {
     @extend .row;
     @extend .reset-ul;
@@ -25,16 +30,43 @@ $image-field-height: 200px;
       @extend .col-xs-12;
       @extend .col-sm-6;
       margin-bottom: 15px;
-
-      > div {
-        padding: 10px;
-        border: $single-mission-border;
-        border-radius: $border-radius-base;
-      }
     }
 
-    h3 {
+    .mission {
+      padding: 10px;
+      position: relative;
+      border: $single-mission-border;
+      border-radius: $border-radius-base;
+    }
 
+    .flag, .options {
+      @include absolute-top-right(10px, 10px);
+    }
+
+    .flag {
+      @extend .glyphicon;
+      @extend .glyphicon-flag;
+    }
+
+    .options {
+      div {
+        @extend .dropdown;
+
+        > a {
+          @extend .glyphicon;
+          @extend .dropdown-toggle;
+          @extend .glyphicon-cog;
+          text-decoration: none;
+        }
+      }
+
+      ul {
+        @extend .dropdown-menu;
+        @extend .dropdown-menu-right;
+        @extend .dropdown-menu-with-arrow;
+        right: -13px;
+        top: 110%;
+      }
     }
 
     .meta {
@@ -95,7 +127,6 @@ $image-field-height: 200px;
 }
 
 form.new_mission, form.edit_mission {
-  @extend .row-fluid;
 
   padding: 10px;
   border: $mission-form-border;

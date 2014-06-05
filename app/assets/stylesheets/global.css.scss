@@ -29,8 +29,45 @@ body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-#content {
+.fixed-width {
   @extend .container;
+}
+
+.fluid-width {
+  @extend .container-fluid;
+}
+
+.dropdown-menu-with-arrow:before {
+  position: absolute;
+  top: -7px;
+  left: 9px;
+  display: inline-block;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-left: 7px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+
+  &.dropdown-menu-right {
+    right: 12px; 
+    left: auto;
+  }
+}
+
+.dropdown-menu-with-arrow:after {
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  border-left: 6px solid transparent;
+  content: '';
+
+  &.dropdown-menu-right {
+    right: 13px; 
+    left: auto;
+  }
 }
 
 .alert-notice {
