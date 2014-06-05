@@ -102,13 +102,19 @@ $ ->
         dataType: 'text' # we expect no data from the server, this avoids a JSON parse error [https://github.com/toastdriven/django-tastypie/issues/886]
         success: ->
           message = $('<p style="display:none">').text $this.data('message-flagged')
-          $mission.height $mission.height()
-                  .children().fadeOut 'fast', ->
+          $mission.children().fadeOut 'fast', ->
                     $(this).remove()
           $mission.addClass('flagged')
                   .append(message)
           message.fadeIn 'fast'
           $mission.height message.outerHeight() + 20
+          restackMissions = ->
+            if Masonry
+              missionsContainer.find('.missions').masonry()
+          if Modernizr.csstransitions
+            $mission.on 'transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', restackMissions
+          else
+            restackMissions()
           $this.removeClass('spin').data 'busy', false
         error: ->
           DIALOG.error($this.data('message-flag-error'))

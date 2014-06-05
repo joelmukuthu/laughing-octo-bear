@@ -84,3 +84,16 @@
   <% end %>
 
 </div>
+
+<%= content_for :javascripts do %>
+  <%= javascript_include_tag 'imagesloaded.pkgd.min', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'masonry.pkgd.min', 'data-turbolinks-track' => true %>
+  <script data-turbolinks-track="true">
+    $(function () {
+      var masonryContainer = $('#missions .missions');
+      masonryContainer.imagesLoaded(function () {
+        masonryContainer.masonry();
+      })
+    });
+  </script>
+<% end %>

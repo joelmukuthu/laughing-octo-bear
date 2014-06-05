@@ -37,6 +37,7 @@ $image-field-height: 200px;
       position: relative;
       border: $single-mission-border;
       border-radius: $border-radius-base;
+      background: #fff;
       @include transition(height 600ms);
     }
 
