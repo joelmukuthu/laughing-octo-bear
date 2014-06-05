@@ -38,6 +38,7 @@ en:
     views: view # is pluralized in code
     edit: Edit
     delete: Delete
+    edit_or_delete: Edit or delete this mission
     delete_confirmation: Permanently delete this mission?
     flag_as_inappropriate: Flag this mission as inappropriate
     flagged_as_inappropriate: Thank you for submitting a report
