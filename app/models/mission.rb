@@ -16,10 +16,19 @@ class Mission < ActiveRecord::Base
 
   belongs_to :category
 
+  has_many :flags
+
   # record unique visits/views/impressions on an instance of Mission
   is_impressionable :counter_cache => true, :column_name => :views_cache
 
   def views
     self.views_cache
+  end
+
+  def flagged_by? user
+    self.flags.each do |flag|
+      return true if flag.reporter == user
+    end
+    false
   end
 end

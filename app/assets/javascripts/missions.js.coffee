@@ -24,11 +24,11 @@ $ ->
   removeImageButton.click (e) ->
     e.preventDefault()
     BootstrapDialog.show
-      title: 'Confirm' # TODO: move to locale file
+      title: I18n.dialogs.confirm.title
       message: removeImageButton.data('message').replace('%{filename}', chosenImageText.text())
       buttons: [
         {
-          label: 'Yes' # TODO: move to locale file
+          label: I18n.dialogs.confirm.ok
           action: (dialog) ->
             image.hide()
             removeImageButton.hide()
@@ -42,7 +42,7 @@ $ ->
             dialog.close()
         }, 
         {
-          label: 'No' # TODO: move to locale file
+          label: I18n.dialogs.confirm.cancel
           action: (dialog) ->
             dialog.close()
         }
@@ -86,3 +86,30 @@ $ ->
       addImageButton.hide()
       changeImageButton.show()
       removeImageButton.show()
+
+  missionsContainer = $ '#missions'
+
+  missionsContainer.find('.flag')
+    .tooltip()
+    .click (e) ->
+      e.preventDefault()
+      return false if $(this).data 'busy'
+      $this = $(this).addClass('spin').data 'busy', true
+      $mission = $this.parents('div.mission').first()
+      $.ajax 
+        url: $this.attr('href')
+        type: $this.data 'method'
+        dataType: 'text' # we expect no data from the server, this avoids a JSON parse error [https://github.com/toastdriven/django-tastypie/issues/886]
+        success: ->
+          message = $('<p style="display:none">').text $this.data('message-flagged')
+          $mission.height $mission.height()
+                  .children().fadeOut 'fast', ->
+                    $(this).remove()
+          $mission.addClass('flagged')
+                  .append(message)
+          message.fadeIn 'fast'
+          $mission.height message.outerHeight() + 20
+          $this.removeClass('spin').data 'busy', false
+        error: ->
+          DIALOG.error($this.data('message-flag-error'))
+      return false

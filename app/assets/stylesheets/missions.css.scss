@@ -16,13 +16,13 @@ $mission-form-border: 1px $gray-light solid;
 $single-mission-border: 1px $gray-light solid;
 $image-field-height: 200px;
 
-.missions {
+#missions {
 
   .listed {
     @extend .fixed-width;
   }
 
-  #missions {
+  .missions {
     @extend .row;
     @extend .reset-ul;
 
@@ -37,6 +37,12 @@ $image-field-height: 200px;
       position: relative;
       border: $single-mission-border;
       border-radius: $border-radius-base;
+      @include transition(height 600ms);
+    }
+
+    .flagged p {
+      color: $gray;
+      margin-top: 10px;
     }
 
     .flag, .options {
@@ -46,6 +52,7 @@ $image-field-height: 200px;
     .flag {
       @extend .glyphicon;
       @extend .glyphicon-flag;
+      text-decoration: none;
     }
 
     .options {
@@ -57,6 +64,7 @@ $image-field-height: 200px;
           @extend .dropdown-toggle;
           @extend .glyphicon-cog;
           text-decoration: none;
+          top: -1px;
         }
       }
 

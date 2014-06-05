@@ -20,6 +20,18 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  dialogs:
+    confirm:
+      title: Confirm
+      ok: Ok
+      cancel: Cancel
+    error:
+      title: An error occurred
+      ok: Ok
+    notice:
+      title: Info
+      ok: Ok
+
   missions:
     by: by
     ago: ago
@@ -27,6 +39,9 @@ en:
     edit: Edit
     delete: Delete
     delete_confirmation: Permanently delete this mission?
+    flag_as_inappropriate: Flag this mission as inappropriate
+    flagged_as_inappropriate: Thank you for submitting a report
+    could_not_flag_as_inappropriate: Sorry! The mission could not be flagged as inappropriate. We've been notified of this error and our developers will work to fix it.
 
     form:
       new_mission: New mission form

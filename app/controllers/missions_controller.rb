@@ -1,7 +1,9 @@
 class MissionsController < ApplicationController
-  before_action :set_mission, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:show, :new, :edit, :create, :update, :destroy]
+  before_action :set_mission, only: [:show, :edit, :update, :destroy, :flag]
+  before_action :authenticate_user!, only: [:show, :new, :edit, :create, :update, :destroy, :flag]
   before_action :set_categories, only: [:new, :edit]
+
+  # TODO: I18n flash messages
 
   # GET /missions
   # GET /missions.json
@@ -64,6 +66,22 @@ class MissionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to missions_url }
       format.json { head :no_content }
+    end
+  end
+
+  # PATCH/PUT /missions/1/flag
+  # PATCH/PUT /missions/1/flag.json
+  def flag
+    respond_to do |format|
+      if @mission.flagged_by?(current_user) || @mission.flags.create(reporter: current_user)
+        # TODO: if flagged count exceeds minimum allowed flags till it's taken down automatically,
+        # notify user, mark as flagged so no one sees it
+        format.html { redirect_to missions_url, notice: t('missions.flagged_as_inappropriate') }
+        format.json { head :accepted }
+      else
+        format.html { redirect_to missions_url, error: t('missions.could_not_flag_as_inappropriate') }
+        format.json { head :internal_server_error }
+      end
     end
   end
 

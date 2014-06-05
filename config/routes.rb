@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         as: :add_user_email
 
   resources :missions
+  match '/missions/:id/flag' => 'missions#flag', via: [:patch, :put], as: :flag_mission
 
   resources :messages
   

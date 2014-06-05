@@ -15,6 +15,26 @@
     <%= yield %>
   </div>
 
+  <script>
+    var I18n = {
+      dialogs: {
+        confirm: {
+          title: "<%= t 'dialogs.confirm.title' %>",
+          ok: "<%= t 'dialogs.confirm.ok' %>",
+          cancel: "<%= t 'dialogs.confirm.cancel' %>"
+        },
+        error: {
+          title: "<%= t 'dialogs.error.title' %>",
+          ok: "<%= t 'dialogs.error.ok' %>"
+        },
+        notice: {
+          title: "<%= t 'dialogs.notice.title' %>",
+          ok: "<%= t 'dialogs.notice.ok' %>"
+        }
+      }
+    }
+  </script>
+  <%= yield :javascript_variables %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= yield :javascripts %>
 </body>

@@ -1,14 +1,15 @@
 <h1>Listing missions</h1>
 
-<div class="missions">
+<div id="missions">
 
   <% if @missions.any? %>
 
   <p><%= link_to 'New Mission', new_mission_path if can_create_missions? %></p>
 
   <div class="listed">
-    <ul id="missions">
+    <ul class="missions">
       <% @missions.each_with_index do |mission| %>
+      <% next if mission.flagged_by? current_user %>
       <li>
         <div class="mission">
           <% if can_update_mission? mission %>
@@ -22,7 +23,18 @@
               </div>
             </div>
           <% else %>
-            <a class="flag" href="#"></a>
+            <%= link_to '', 
+                        flag_mission_path(mission, format: :json), 
+                        method: :patch, 
+                        class: 'flag',
+                        data: { 
+                          'no-turbolink' => '',
+                          toggle: 'tooltip', 
+                          placement: 'auto top', 
+                          title: t('missions.flag_as_inappropriate'),
+                          'message-flagged' => t('missions.flagged_as_inappropriate'),
+                          'message-flag-error' => t('missions.could_not_flag_as_inappropriate')
+                        } %>
           <% end %>
 
           <h3><%= can_view_missions? ? link_to(mission.title, mission) : mission.title %></h3>
