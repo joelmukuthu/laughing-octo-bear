@@ -41,6 +41,7 @@ en:
     delete_confirmation: Permanently delete this mission?
     flag_as_inappropriate: Flag this mission as inappropriate
     flagged_as_inappropriate: Thank you for submitting a report
+    flag_as_inappropriate_confirmation: Flag this mission as inappropriate?
     could_not_flag_as_inappropriate: Sorry! The mission could not be flagged as inappropriate. We've been notified of this error and our developers will work to fix it.
 
     form:

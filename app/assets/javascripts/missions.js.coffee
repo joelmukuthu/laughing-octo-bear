@@ -88,34 +88,46 @@ $ ->
       removeImageButton.show()
 
   missionsContainer = $ '#missions'
+  missionsFlagContainers = missionsContainer.find('.flag')
 
-  missionsContainer.find('.flag')
-    .tooltip()
-    .click (e) ->
-      e.preventDefault()
-      return false if $(this).data 'busy'
-      $this = $(this).addClass('spin').data 'busy', true
-      $mission = $this.parents('div.mission').first()
-      $.ajax 
-        url: $this.attr('href')
-        type: $this.data 'method'
-        dataType: 'text' # we expect no data from the server, this avoids a JSON parse error [https://github.com/toastdriven/django-tastypie/issues/886]
-        success: ->
-          message = $('<p style="display:none">').text $this.data('message-flagged')
-          $mission.children().fadeOut 'fast', ->
-                    $(this).remove()
-          $mission.addClass('flagged')
-                  .append(message)
-          message.fadeIn 'fast'
-          $mission.height message.outerHeight() + 20
-          restackMissions = ->
-            if Masonry
-              missionsContainer.find('.missions').masonry()
-          if Modernizr.csstransitions
-            $mission.on 'transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', restackMissions
-          else
-            restackMissions()
-          $this.removeClass('spin').data 'busy', false
-        error: ->
-          DIALOG.error($this.data('message-flag-error'))
-      return false
+  # disabled tooltip
+  # missionsFlagDropdownContainers = missionsFlagContainers.children('div').first()
+  # missionsFlagContainers.tooltip()
+  # missionsFlagDropdownContainers.on 'show.bs.dropdown', ->
+  #   $(this).parent().tooltip('hide')
+
+  missionsFlagContainers.find('.ok').click (e) ->
+    e.preventDefault()
+    return if $(this).data 'busy'
+    $this = $(this).data 'busy', true
+    $flag = $this.parents('.flag').first().addClass('spin')
+    $mission = $this.parents('.mission').first()
+    $flag.find('[data-toggle="dropdown"]').click()
+    $.ajax 
+      url: $this.data 'url'
+      type: $this.data 'method'
+      dataType: 'text' # we expect no data from the server, this avoids a JSON parse error [https://github.com/toastdriven/django-tastypie/issues/886]
+      success: ->
+        message = $('<p style="display:none">').text $this.data('message-flagged')
+        $mission.height $mission.height()
+        $mission.children().fadeOut 'fast', ->
+                  $(this).remove()
+        $mission.addClass('flagged')
+                .append(message)
+        message.fadeIn 'fast'
+        $mission.height message.outerHeight() + 20
+        restackMissions = ->
+          if Masonry
+            missionsContainer.find('.missions').masonry()
+        if Modernizr.csstransitions
+          $mission.on 'transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', restackMissions
+        else
+          restackMissions()
+        $this.data 'busy', false
+        $flag.removeClass('spin')
+      error: ->
+        DIALOG.error($this.data('message-flag-error'))
+
+  missionsFlagContainers.find('.cancel').click (e) ->
+    e.preventDefault()
+    $(this).parents('.flag').first().find('[data-toggle="dropdown"]').click()

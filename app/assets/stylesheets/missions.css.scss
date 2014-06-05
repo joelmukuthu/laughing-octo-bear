@@ -12,6 +12,7 @@
 // $input-color-placeholder; // from bootstrap
 // $gray-light // from bootstrap
 // $gray // from bootstrap
+// $dropdown-link-hover-bg // from bootstrap
 $mission-form-border: 1px $gray-light solid;
 $single-mission-border: 1px $gray-light solid;
 $image-field-height: 200px;
@@ -50,20 +51,13 @@ $image-field-height: 200px;
       @include absolute-top-right(10px, 10px);
     }
 
-    .flag {
-      @extend .glyphicon;
-      @extend .glyphicon-flag;
-      text-decoration: none;
-    }
-
-    .options {
+    .options, .flag {
       div {
         @extend .dropdown;
 
         > a {
           @extend .glyphicon;
           @extend .dropdown-toggle;
-          @extend .glyphicon-cog;
           text-decoration: none;
           top: -1px;
         }
@@ -75,6 +69,39 @@ $image-field-height: 200px;
         @extend .dropdown-menu-with-arrow;
         right: -13px;
         top: 110%;
+      }
+    }
+
+    .options div > a {
+      @extend .glyphicon-cog;
+    }
+
+    .flag {
+      div > a {
+        @extend .glyphicon-flag;
+      }
+
+      li {
+        span {
+          padding: 3px 10px;
+          display: inline-block;
+        }
+
+        &.buttons {
+          text-align: center;
+          padding: 9px 0 8px;
+          background-color: $dropdown-link-hover-bg;
+        }
+
+        button {
+          @extend .btn;
+          @extend .btn-sm;
+        }
+
+        .ok {
+          @extend .btn-primary;
+          margin-right: 5px;
+        }
       }
     }
 
