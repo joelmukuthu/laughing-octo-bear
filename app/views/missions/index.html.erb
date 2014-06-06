@@ -11,7 +11,10 @@
       <% @missions.each_with_index do |mission| %>
       <% next if mission.flagged_by? current_user %>
       <li>
-        <div class="mission">
+        <div class="mission <%= 'accomplished' if mission.accomplished? %>">
+          <% if mission.accomplished? %>
+          <span class="accomplished"><%= t 'missions.accomplished' %></span>
+          <% end %>
           <% if can_update_mission? mission %>
             <div class="options" title="<%= t('missions.edit_or_delete') %>">
               <div>

@@ -40,6 +40,21 @@ $image-field-height: 200px;
       border-radius: $border-radius-base;
       background: #fff;
       @include transition(height 600ms);
+
+      &.accomplished {
+        padding-top: 20px;
+      }
+
+      .accomplished {
+        color: $gray;
+        padding: 3px 15px;
+        font-size: smaller;
+        display: inline-block;
+        border: $single-mission-border;
+        border-radius: $border-radius-base;
+        background-color: $dropdown-link-hover-bg;
+        @include absolute-top-left(10px, -10px)
+      }
     }
 
     .flagged p {

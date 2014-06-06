@@ -19,10 +19,10 @@ class Message < ActiveRecord::Base
   validates_presence_of :body, :sender_id, :recipient_id
 
   def read?
-    !self.read_at.nil?
+    !self.read_at?
   end
 
   def unread?
-    self.read_at.nil?
+    self.read_at?
   end
 end
