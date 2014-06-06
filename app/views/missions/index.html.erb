@@ -14,12 +14,17 @@
       <li class="mission item <%= 'active' if index == 0 %>">
         <% image = image_tag mission.image.url, alt: mission.title %>
         <%= can_view_missions? ? link_to(image, mission) : image %>
-        <div class="carousel-caption">
-          <% if mission.reason? %>
-          <p><%= mission.reason %></p>
-          <% end %>
-          <%= render 'mission_actions', mission: mission %>
-          </p>
+        <div class="caption carousel-caption">
+          <div class="top">
+            <%= render 'mission_title_and_meta', mission: mission %>
+          </div>
+          <div class="bottom">
+            <% if mission.reason? %>
+            <p><%= mission.reason %></p>
+            <% end %>
+            <%= render 'mission_actions', mission: mission %>
+            </p>
+          </div>
         </div>
       </li>
       <% end %>
@@ -76,17 +81,7 @@
             
           <% end %>
 
-          <h3><%= can_view_missions? ? link_to(mission.title, mission) : mission.title %></h3>
-
-          <p class="meta">
-            <span class="owner"><%= t 'missions.by' %> <%= mission.owner.name %></span>
-            <% if mission.location? %>
-            <span class="location"><%= mission.location %></span>
-            <% end %>
-            <span class="time"><%= time_ago_in_words mission.created_at %> <%= t 'missions.ago' %></span>
-            <span class="views"><%= pluralize mission.views, t('missions.views') %> </span>
-            <span class="category"><%= mission.category.name %></span>
-          </p>
+          <%= render 'mission_title_and_meta', mission: mission %>
 
           <% if mission.image? %>
           <div class="img">

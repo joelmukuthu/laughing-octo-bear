@@ -1,0 +1,10 @@
+<h3><%= can_view_missions? ? link_to(mission.title, mission) : mission.title %></h3>
+<p class="meta">
+  <span class="owner"><%= t 'missions.by' %> <%= mission.owner.name %></span>
+  <% if mission.location? %>
+  <span class="location"><%= mission.location %></span>
+  <% end %>
+  <span class="time"><%= time_ago_in_words mission.created_at %> <%= t 'missions.ago' %></span>
+  <span class="views"><%= pluralize mission.views, t('missions.views') %> </span>
+  <span class="category"><%= mission.category.name %></span>
+</p>

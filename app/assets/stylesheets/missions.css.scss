@@ -49,9 +49,22 @@ $image-field-height: 200px;
         height: 415px;
       }
 
-      // div {
-      //   @extend .carousel-caption;
-      // }
+      .caption {
+        // @extend .carousel-caption;
+        top: 0;
+
+        .top, .bottom {
+          @include absolute(auto, 0, auto, 0);
+        }
+
+        .top {
+          top: 0;
+        }
+
+        .bottom {
+          bottom: 30px;
+        }
+      }
     }
   }
 
@@ -152,6 +165,16 @@ $image-field-height: 200px;
       }
     }
 
+    .img {
+      margin: 0 -10px 10px;
+      
+      img {
+        @extend .img-responsive;
+      } 
+    }
+  }
+
+  .mission {
     .meta {
       color: $gray;
 
@@ -165,16 +188,6 @@ $image-field-height: 200px;
       }
     }
 
-    .img {
-      margin: 0 -10px 10px;
-      
-      img {
-        @extend .img-responsive;
-      } 
-    }
-  }
-
-  .mission {
     .actions {
       text-align: center;
 
