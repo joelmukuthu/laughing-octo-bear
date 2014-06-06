@@ -21,6 +21,8 @@ class Mission < ActiveRecord::Base
   # record unique visits/views/impressions on an instance of Mission
   is_impressionable :counter_cache => true, :column_name => :views_cache
 
+  alias_attribute :reason, :description
+
   def views
     self.views_cache
   end

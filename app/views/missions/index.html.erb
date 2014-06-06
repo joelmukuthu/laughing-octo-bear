@@ -2,13 +2,43 @@
 
 <div id="missions">
 
-  <% if @missions.any? %>
+  <% if can_create_missions? %>
+  <p><%= link_to t('missions.new_mission'), new_mission_path %></p>
+  <% end %>
 
-  <p><%= link_to 'New Mission', new_mission_path if can_create_missions? %></p>
+  <% if @showcased.any? %>
+  <div class="showcased carousel slide" data-ride="carousel" id="showcased-missions">
 
+    <ul class="missions carousel-inner">
+      <% @showcased.each_with_index do |mission, index| %>
+      <li class="mission item <%= 'active' if index == 0 %>">
+        <% image = image_tag mission.image.url, alt: mission.title %>
+        <%= can_view_missions? ? link_to(image, mission) : image %>
+        <div class="carousel-caption">
+          <% if mission.reason? %>
+          <p><%= mission.reason %></p>
+          <% end %>
+          <%= render 'mission_actions', mission: mission %>
+          </p>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+
+    <ol class="carousel-indicators">
+      <li data-target="#showcased-missions" data-slide-to="0" class="active"></li>
+      <% for i in 1..(@showcased.count-1) %>
+      <li data-target="#showcased-missions" data-slide-to="<%= i %>"></li>
+      <% end %>
+    </ol>
+
+  </div>
+  <% end %>
+
+  <% if @listed.any? %>
   <div class="listed">
     <ul class="missions">
-      <% @missions.each_with_index do |mission| %>
+      <% @listed.each_with_index do |mission| %>
       <% next if mission.flagged_by? current_user %>
       <li>
         <div class="mission <%= 'accomplished' if mission.accomplished? %>">
@@ -25,7 +55,7 @@
                 </ul>
               </div>
             </div>
-          <% else %>
+          <% elsif can_flag_mission? %>
             <div class="flag" data-toggle="tooltip" data-placement="auto top" title="<%= t('missions.flag_as_inappropriate') %>">
               <div>
                 <a data-toggle="dropdown" href="#"></a>
@@ -65,30 +95,19 @@
           </div>
           <% end %>
 
-          <p class="actions">
-            <button class="torches">
-              <span></span> 0
-            </button>
-            <button class="sponsors">
-              <span></span> 0
-            </button>
-            <button class="shares">
-              <span></span> 0
-            </button>
-          </p>
+          <%= render 'mission_actions', mission: mission %>
 
-          <% if mission.description? %>
-          <p class="reason"><%= mission.description %></p>
+          <% if mission.reason? %>
+          <p class="reason"><%= mission.reason %></p>
           <% end %>
         </div>
       </li>
       <% end %>
     </ul>
   </div>
-
   <% else %>
 
-  <p>There are no missions yet. <%= link_to 'New Mission', new_mission_path if can_update_missions? %></p>
+  <p><%= t 'missions.no_missions' %>. <%= link_to t('missions.new_mission'), new_mission_path if can_create_missions? %></p>
 
   <% end %>
 
@@ -99,10 +118,10 @@
   <%= javascript_include_tag 'masonry.pkgd.min', 'data-turbolinks-track' => true %>
   <script data-turbolinks-track="true">
     $(function () {
-      var masonryContainer = $('#missions .missions');
+      var masonryContainer = $('#missions .listed .missions');
       masonryContainer.imagesLoaded(function () {
         masonryContainer.masonry();
-      })
+      });
     });
   </script>
 <% end %>

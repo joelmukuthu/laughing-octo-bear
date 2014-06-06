@@ -103,6 +103,9 @@ $ ->
     $flag = $this.parents('.flag').first().addClass('spin')
     $mission = $this.parents('.mission').first()
     $flag.find('[data-toggle="dropdown"]').click()
+    stopSpinner = ->
+      $this.data 'busy', false
+      $flag.removeClass('spin')
     $.ajax 
       url: $this.data 'url'
       type: $this.data 'method'
@@ -123,10 +126,10 @@ $ ->
           $mission.on 'transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', restackMissions
         else
           restackMissions()
-        $this.data 'busy', false
-        $flag.removeClass('spin')
+        stopSpinner()
       error: ->
         DIALOG.error($this.data('message-flag-error'))
+        stopSpinner()
 
   missionsFlagContainers.find('.cancel').click (e) ->
     e.preventDefault()

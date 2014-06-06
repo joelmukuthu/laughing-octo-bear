@@ -33,6 +33,8 @@ en:
       ok: Ok
 
   missions:
+    no_missions: There are no missions yet.
+    new_mission: New mission
     by: by
     ago: ago
     views: view # is pluralized in code
