@@ -87,8 +87,9 @@ $ ->
       changeImageButton.show()
       removeImageButton.show()
 
-  missionsContainer = $ '#missions'
-  missionsFlagContainers = missionsContainer.find('.flag')
+  listedMissionsContainer = $ '#listed-missions'
+  listedMissions = listedMissionsContainer.find('.missions')
+  missionsFlagContainers = listedMissionsContainer.find('.flag')
 
   # disabled tooltip
   # missionsFlagDropdownContainers = missionsFlagContainers.children('div').first()
@@ -121,7 +122,7 @@ $ ->
         $mission.height message.outerHeight() + 20
         restackMissions = ->
           if Masonry
-            missionsContainer.find('.missions').masonry()
+            listedMissions.masonry()
         if Modernizr.csstransitions
           $mission.on 'transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', restackMissions
         else

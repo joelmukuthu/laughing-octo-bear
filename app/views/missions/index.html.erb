@@ -41,7 +41,7 @@
   <% end %>
 
   <% if @listed.any? %>
-  <div class="listed">
+  <div class="listed" id="listed-missions">
     <ul class="missions">
       <% @listed.each_with_index do |mission| %>
       <% next if mission.flagged_by? current_user %>
@@ -113,7 +113,7 @@
   <%= javascript_include_tag 'masonry.pkgd.min', 'data-turbolinks-track' => true %>
   <script data-turbolinks-track="true">
     $(function () {
-      var masonryContainer = $('#missions .listed .missions');
+      var masonryContainer = $('#listed-missions .missions');
       masonryContainer.imagesLoaded(function () {
         masonryContainer.masonry();
       });
