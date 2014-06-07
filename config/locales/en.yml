@@ -61,6 +61,8 @@ en:
       category: Category (required)
       location: Location (optional)
       deadline: Deadline (optional)
+      date_format: '%d.%m.%Y'
+      date_format_for_datepicker: 'dd.mm.yyyy'
       reason: Reason (optional)
       privacy: Privacy
       who_can_sponsor: Who can sponsor this mission?
