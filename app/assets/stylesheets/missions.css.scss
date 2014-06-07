@@ -88,6 +88,10 @@ $image-field-height: 200px;
 
       &.accomplished {
         padding-top: 20px;
+
+        &.flagged {
+          padding-top: 10px;
+        }
       }
 
       .accomplished {
