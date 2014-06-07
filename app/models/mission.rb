@@ -23,6 +23,17 @@ class Mission < ActiveRecord::Base
 
   alias_attribute :reason, :description
 
+  scope :flagged, -> { joins(:flags).uniq }
+
+  scope :not_flagged, -> { where.not(id: Flag.select(:mission_id).uniq) }
+
+  scope :flagged_by, ->(user) { flagged.where(mission_flags: {user_id: user.id}) }
+
+  # using .where on this .includes forces AR to use .references which then translates to:
+  # missions which have been flagged but not by this user. that's not what we want. instead we'll
+  # fetch all missions and filter in the application layer
+  # scope :not_flagged_by, ->(user) { includes(:flags).where.not(mission_flags: {user_id: user.id}) }
+
   def views
     self.views_cache
   end

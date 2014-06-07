@@ -8,13 +8,13 @@ class MissionsController < ApplicationController
   # GET /missions
   # GET /missions.json
   def index
-    # TODO: rules for featured missions: no flags, image correct size, 
+    # TODO: rules for featured missions: image correct size (1920x415).
     # TODO later: featured only approved by admin
     filter = params[:filter] || 'featured'
     case filter
     when 'featured'
       @listed = Mission.all
-      @showcased = Mission.where.not(image: nil).limit(5)
+      @showcased = Mission.not_flagged.where.not(image: nil).limit(5)
     end
   end
 
