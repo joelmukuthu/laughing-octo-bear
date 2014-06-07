@@ -15,7 +15,6 @@ class Message < ActiveRecord::Base
               class_name: 'Message',
               foreign_key: 'reply_to'            
 
-
   validates_presence_of :body, :sender_id, :recipient_id
 
   def read?
