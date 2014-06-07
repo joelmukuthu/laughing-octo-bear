@@ -88,7 +88,9 @@ $ ->
       removeImageButton.show()
 
   listedMissionsContainer = $ '#listed-missions'
+  showcasedMissionsContainer = $ '#showcased-missions'
   listedMissions = listedMissionsContainer.find('.missions')
+  showcasedMissions = showcasedMissionsContainer.find('.missions')
   missionsFlagContainers = listedMissionsContainer.find('.flag')
 
   # disabled tooltip
@@ -113,6 +115,7 @@ $ ->
       dataType: 'text' # we expect no data from the server, this avoids a JSON parse error [https://github.com/toastdriven/django-tastypie/issues/886]
       success: ->
         message = $('<p style="display:none">').text $this.data('message-flagged')
+        missionId = $mission.data('mission-id')
         $mission.height $mission.height()
         $mission.children().fadeOut 'fast', ->
                   $(this).remove()
@@ -128,6 +131,29 @@ $ ->
         else
           restackMissions()
         stopSpinner()
+        if showcasedMissions.length 
+          missions = showcasedMissions.find('.mission')
+          missions.each (i,v) ->
+            $mission = $(this)
+            removeMissionAndUpdateIndicators = ->
+              showcasedMissionsContainer.carousel('pause')
+              $mission.remove()
+              showcasedMissionsContainer.find('ol li[data-slide-to="' + index + '"]').remove()
+              indicators = showcasedMissionsContainer.find('ol li')
+              indicators.each (i,v) ->
+                $(this).attr('data-slide-to', i).data('slide-to', i)
+              if indicators.length == 1
+                indicators.first().addClass('active')
+              showcasedMissionsContainer.carousel('cycle')
+            if $mission.data('mission-id') == missionId
+              index = missions.index()
+              if $mission.hasClass('active')
+                showcasedMissionsContainer.one 'slid.bs.carousel', removeMissionAndUpdateIndicators
+                showcasedMissionsContainer.carousel('next')
+              else
+                removeMissionAndUpdateIndicators()
+              return false
+            return true
       error: ->
         DIALOG.error($this.data('message-flag-error'))
         stopSpinner()

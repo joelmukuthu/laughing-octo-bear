@@ -11,7 +11,7 @@
 
     <ul class="missions carousel-inner">
       <% @showcased.each_with_index do |mission, index| %>
-      <li class="mission item <%= 'active' if index == 0 %>">
+      <li class="mission item <%= 'active' if index == 0 %>" data-mission-id="<%= mission.id %>">
         <% image = image_tag mission.image.url, alt: mission.title %>
         <%= can_view_missions? ? link_to(image, mission) : image %>
         <div class="caption carousel-caption">
@@ -46,7 +46,7 @@
       <% @listed.each_with_index do |mission| %>
       <% next if mission.flagged_by? current_user %>
       <li>
-        <div class="mission <%= 'accomplished' if mission.accomplished? %>">
+        <div class="mission <%= 'accomplished' if mission.accomplished? %>" data-mission-id="<%= mission.id %>">
           <% if mission.accomplished? %>
           <span class="accomplished"><%= t 'missions.accomplished' %></span>
           <% end %>
