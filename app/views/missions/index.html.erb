@@ -32,7 +32,7 @@
 
     <ol class="carousel-indicators">
       <li data-target="#showcased-missions" data-slide-to="0" class="active"></li>
-      <% for i in 1..(@showcased.count-1) %>
+      <% for i in 1..(@showcased.size-1) %>
       <li data-target="#showcased-missions" data-slide-to="<%= i %>"></li>
       <% end %>
     </ol>

@@ -29,6 +29,9 @@ class Mission < ActiveRecord::Base
 
   scope :flagged_by, ->(user) { flagged.where(mission_flags: {user_id: user.id}) }
 
+  # TODO: should we also add .references for :category and :owner?
+  default_scope { includes(:category,:owner,:flags) }
+
   # using .where on this .includes forces AR to use .references which then translates to:
   # missions which have been flagged but not by this user. that's not what we want. instead we'll
   # fetch all missions and filter in the application layer
