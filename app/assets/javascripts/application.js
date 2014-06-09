@@ -12,7 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.turbolinks
 //= require turbolinks
+//= require modernizr-2.8.2.custom.min
 //= require bootstrap
+//= require bootstrap-datepicker-1.3.0
+//= require imagesloaded.pkgd.min
+//= require masonry.pkgd.min
 //= require global
 //= require_tree .

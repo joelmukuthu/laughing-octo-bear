@@ -42,7 +42,12 @@
       </div>
       <div class="deadline">
         <span><i></i></span>
-        <%= f.text_field :deadline, placeholder: t('missions.form.deadline'), id: 'deadline', value: @mission.deadline? ? @mission.deadline.strftime(t('missions.form.date_format')) : '' %>
+        <%= f.text_field :deadline, 
+                          placeholder: t('missions.form.deadline'), 
+                          id: 'deadline', 
+                          'data-date-format' => t('missions.form.date_format_for_datepicker'),
+                          'data-date-autoclose' => true,
+                          value: @mission.deadline? ? @mission.deadline.strftime(t('missions.form.date_format')) : '' %>
       </div>
     </div>
 
@@ -83,19 +88,3 @@
     </div>
   <% end %>
 </div>
-
-<%= content_for :stylesheets do %>
-  <%= stylesheet_link_tag 'datepicker-1.3.0', 'data-turbolinks-track' => true %>
-<% end %>
-
-<%= content_for :javascripts do %>
-  <%= javascript_include_tag 'bootstrap-datepicker-1.3.0', 'data-turbolinks-track' => true %>
-  <script data-turbolinks-track="true">
-    $(function () {
-      $('#deadline').datepicker({
-        format: "<%= t('missions.form.date_format_for_datepicker') %>",
-        autoclose: true
-      });
-    });
-  </script>
-<% end %>

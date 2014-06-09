@@ -7,15 +7,6 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= yield :stylesheets %>
   <%= csrf_meta_tags %>
-  <%= javascript_include_tag 'modernizr-2.8.2.custom.min', 'data-turbolinks-track' => true %>
-</head>
-<body>
-
-  <div id="content">
-    <%= render 'partials/messages' %>
-    <%= yield %>
-  </div>
-
   <script>
     var I18n = {
       dialogs: {
@@ -35,8 +26,12 @@
       }
     }
   </script>
-  <%= yield :javascript_variables %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= yield :javascripts %>
+</head>
+<body class="<%= controller_name %>">
+  <div id="content">
+    <%= render 'partials/messages' %>
+    <%= yield %>
+  </div>
 </body>
 </html>

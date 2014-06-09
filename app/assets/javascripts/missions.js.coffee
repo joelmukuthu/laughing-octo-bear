@@ -3,6 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+  # no need to proceed if not on a /missions page. thankfully turbolinks updates the body class
+  return if !$('body').hasClass('missions')
+
   imageFieldDiv = $('#image_field')
   imageField = $('#mission_image', imageFieldDiv)
   removeImageButton = $('#remove_image', imageFieldDiv)
@@ -16,6 +19,8 @@ $ ->
   allowedImageTypes = ['.jpg', '.png', '.jpeg']
 
   imageLabel.data 'original', imageLabel.text()
+
+  $('#deadline').datepicker()
 
   resetFormElement = (e) -> 
     e.wrap('<form>').closest('form').get(0).reset()
@@ -99,6 +104,10 @@ $ ->
   # missionsFlagDropdownContainers.on 'show.bs.dropdown', ->
   #   $(this).parent().tooltip('hide')
 
+  # use masonry to properly stack listed missions
+  listedMissions.imagesLoaded ->
+    listedMissions.masonry();
+
   missionsFlagContainers.find('.ok').click (e) ->
     e.preventDefault()
     return if $(this).data 'busy'
@@ -124,8 +133,7 @@ $ ->
         message.fadeIn 'fast'
         $mission.height message.outerHeight() + 20
         restackMissions = ->
-          if Masonry
-            listedMissions.masonry()
+          listedMissions.masonry()
         if Modernizr.csstransitions
           $mission.on 'transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', restackMissions
         else
