@@ -16,9 +16,10 @@ class User < ActiveRecord::Base
 
   has_many :sent_messages, -> { where deleted_by_sender: false },
             class_name: 'Message',
-            foreign_key: 'sender_id'
+            foreign_key: 'sender_id',
+            dependent: :nullify
 
-  has_many :identities
+  has_many :identities, dependent: :destroy
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
