@@ -82,7 +82,8 @@
 
           <% if mission.image? %>
           <div class="img">
-            <%= link_to image_tag(mission.image.url, alt: mission.title), mission %>
+            <% image = image_tag mission.image.url, alt: mission.title %>
+            <%= can_view_mission?(mission) ? link_to(image, mission) : image %>
           </div>
           <% end %>
 

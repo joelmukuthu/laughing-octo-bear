@@ -1,6 +1,8 @@
 class MissionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_mission, only: [:show, :edit, :update, :destroy, :flag]
+  before_action :ensure_current_user_can_update_mission!, only: [:edit, :update, :destroy]
+  before_action :ensure_current_user_can_view_mission!, only: [:show]
   before_action :set_categories, only: [:new, :edit]
 
   # TODO: I18n flash messages
@@ -83,10 +85,12 @@ class MissionsController < ApplicationController
       if @mission.flagged_by?(current_user) || @mission.flags.create(reporter: current_user)
         # TODO: if flagged count exceeds minimum allowed flags till it's taken down automatically,
         # notify user, mark as flagged so no one sees it
+        # TODO: redirect_to :back (in order to apply whichever filter was active i.e. featured, recent etc)
         format.html { redirect_to missions_url, notice: t('missions.flagged_as_inappropriate') }
         format.json { head :accepted }
       else
-        format.html { redirect_to missions_url, error: t('missions.could_not_flag_as_inappropriate') }
+        # TODO: redirect_to :back (in order to apply whichever filter was active i.e. featured, recent etc)
+        format.html { redirect_to missions_url, alert: t('missions.could_not_flag_as_inappropriate') }
         format.json { head :internal_server_error }
       end
     end
@@ -107,5 +111,19 @@ class MissionsController < ApplicationController
       params.require(:mission).permit(:title, :description, :image, :image_cache, :remove_image, 
                                       :category_id, :location, :deadline, :who_can_sponsor, 
                                       :who_can_see_my_name)
+    end
+
+    def ensure_current_user_can_update_mission!
+      if @mission.owner != current_user
+        redirect_to missions_url, flash: { error: t('missions.edit_access_denied') }
+      end
+    end
+
+    def ensure_current_user_can_view_mission!
+      unless @mission.owner == current_user ||
+        @mission.who_can_see_my_name == Mission::ANYONE_CAN_SPONSOR ||
+        @mission.sponsored_by?(current_user)
+        redirect_to missions_url, alert: t('missions.view_access_denied')
+      end
     end
 end
