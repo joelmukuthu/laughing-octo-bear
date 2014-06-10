@@ -13,7 +13,7 @@
         <%= image_tag mission.image.url, alt: mission.title %>
         <div class="caption carousel-caption">
           <div class="top">
-            <%= render 'mission_title_and_meta', mission: mission %>
+            <%= render 'mission_title_and_info', mission: mission %>
           </div>
           <div class="bottom">
             <% if mission.reason? %>
@@ -78,7 +78,7 @@
             
           <% end %>
 
-          <%= render 'mission_title_and_meta', mission: mission %>
+          <%= render 'mission_title_and_info', mission: mission %>
 
           <% if mission.image? %>
           <div class="img">
