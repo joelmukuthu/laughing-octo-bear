@@ -2,9 +2,7 @@
 
 <div id="missions">
 
-  <% if can_create_missions? %>
   <p><%= link_to t('missions.new_mission'), new_mission_path %></p>
-  <% end %>
 
   <% if @showcased.any? %>
   <div class="showcased carousel slide" data-ride="carousel" id="showcased-missions">
@@ -12,8 +10,7 @@
     <ul class="missions carousel-inner">
       <% @showcased.each_with_index do |mission, index| %>
       <li class="mission item <%= 'active' if index == 0 %>" data-mission-id="<%= mission.id %>">
-        <% image = image_tag mission.image.url, alt: mission.title %>
-        <%= can_view_missions? ? link_to(image, mission) : image %>
+        <%= image_tag mission.image.url, alt: mission.title %>
         <div class="caption carousel-caption">
           <div class="top">
             <%= render 'mission_title_and_meta', mission: mission %>
@@ -60,7 +57,7 @@
                 </ul>
               </div>
             </div>
-          <% elsif can_flag_mission? %>
+          <% else %>
             <div class="flag" data-toggle="tooltip" data-placement="auto top" title="<%= t('missions.flag_as_inappropriate') %>">
               <div>
                 <a data-toggle="dropdown" href="#"></a>
@@ -85,8 +82,7 @@
 
           <% if mission.image? %>
           <div class="img">
-            <% image = image_tag mission.image.url, alt: mission.title %>
-            <%= can_view_missions? ? link_to(image, mission) : image %>
+            <%= link_to image_tag(mission.image.url, alt: mission.title), mission %>
           </div>
           <% end %>
 
@@ -102,7 +98,7 @@
   </div>
   <% else %>
 
-  <p><%= t 'missions.no_missions' %>. <%= link_to t('missions.new_mission'), new_mission_path if can_create_missions? %></p>
+  <p><%= t 'missions.no_missions' %> <%= link_to t('missions.new_mission'), new_mission_path %></p>
 
   <% end %>
 

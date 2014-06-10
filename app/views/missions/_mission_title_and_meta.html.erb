@@ -1,4 +1,4 @@
-<h3><%= can_view_missions? ? link_to(mission.title, mission) : mission.title %></h3>
+<h3><%= link_to mission.title, mission %></h3>
 <p class="meta">
   <span class="owner"><%= t 'missions.by' %> <%= mission.owner.name %></span>
   <% if mission.location? %>

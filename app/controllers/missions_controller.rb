@@ -1,6 +1,6 @@
 class MissionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_mission, only: [:show, :edit, :update, :destroy, :flag]
-  before_action :authenticate_user!, only: [:show, :new, :edit, :create, :update, :destroy, :flag]
   before_action :set_categories, only: [:new, :edit]
 
   # TODO: I18n flash messages
