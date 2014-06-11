@@ -1,11 +1,20 @@
 <p class="actions">
   <button class="torches">
-    <span></span> 0
+    <i></i 0
   </button>
-  <button class="sponsors">
-    <span></span> 0
+  <% class_name = sponsor_button_class mission %>
+  <button class="sponsors <%= class_name %>"
+    <% if class_name == 'disabled' %>
+      <%= raw 'disabled="disabled"' %>
+    <% else %>
+      data-sponsorship-url="<%= mission_sponsorship_path mission %>"
+      data-sponsorship-create-error="<%= t 'missions.could_not_sponsor' %>"
+      data-sponsorship-destroy-error="<%= t 'missions.could_not_unsponsor' %>"
+    <% end %>>
+    <i></i>
+    <span><%= mission.sponsorships.size %></span>
   </button>
   <button class="shares">
-    <span></span> 0
+    <i></i> 0
   </button>
 </p>

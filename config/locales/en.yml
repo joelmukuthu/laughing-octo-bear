@@ -43,10 +43,20 @@ en:
     edit_or_delete: Edit or delete this mission
     delete_confirmation: Permanently delete this mission?
     flag_as_inappropriate: Flag this mission as inappropriate
-    flagged_as_inappropriate: Thank you for submitting a report
+    flagged_as_inappropriate: 'Thank you for submitting a report, this mission will no longer show in your missions feed. [TODO: how to undo this action?]'
     flag_as_inappropriate_confirmation: Flag this mission as inappropriate?
     could_not_flag_as_inappropriate: Sorry! The mission could not be flagged as inappropriate. We've been notified of this error and our developers will work to fix it.
     accomplished: Accomplished
+    sponsor: Sponsor this mission
+    sponsored_successfully: You are now sponsoring this mission!
+    could_not_sponsor: Sorry! You could not be added as a sponsor. We've been notified of this error and our developers will work to fix it.
+    could_not_unsponsor: Sorry! You could not be removed as a sponsor. We've been notified of this error and our developers will work to fix it.
+    edit_access_denied: You are not allowed to update this mission.
+    view_access_denied: You are not allowed to view this mission (you have to be one of the mission's sponsors to view it).
+    edit_sponshorship_denied: You are not allowed to sponsor this mission (you have to be invited to sponsor).
+    cannot_sponsor_own_mission: You cannot sponsor your own mission.
+    already_sponsoring_mission: You are already sponsoring this mission!
+    destroy_sponshorship_denied: You are not allowed to perform this action.
 
     form:
       new_mission: New mission form

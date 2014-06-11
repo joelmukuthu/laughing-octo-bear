@@ -9,7 +9,11 @@ Rails.application.routes.draw do
         via: [:get, :patch, :post], 
         as: :add_user_email
 
-  resources :missions
+  resources :missions do
+    scope module: :mission do 
+      resource :sponsorship, only: [:create, :destroy]
+    end
+  end
   match '/missions/:id/flag' => 'missions#flag', via: [:patch, :put], as: :flag_mission
 
   resources :messages

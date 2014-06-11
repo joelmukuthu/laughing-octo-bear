@@ -199,24 +199,40 @@ $image-field-height: 200px;
         @extend .btn;
         border-radius: 20px;
         margin-right: 10px;
+
+        &:focus:active, &:focus, &:active {
+          outline: 0;
+        }
       }
 
-      span {
+      i {
         @extend .glyphicon;
       }
 
-      .torches span {
+      .disabled {
+        @extend .btn-default;
+      }
+
+      .sponsor, .unsponsor {
+        @extend .btn-primary;
+      }
+
+      .unsponsor {
+        @extend .btn-success;
+      }
+
+      .torches i {
         @extend .glyphicon-tree-deciduous;
       }
 
-      .sponsors span {
+      .sponsors i {
         @extend .glyphicon-user;
       }
 
       .shares {
         margin-right: 0;
 
-        span {
+        i {
           @extend .glyphicon-share-alt;
         }
       }

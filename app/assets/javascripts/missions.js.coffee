@@ -92,11 +92,36 @@ $ ->
       changeImageButton.show()
       removeImageButton.show()
 
-  listedMissionsContainer = $ '#listed-missions'
-  showcasedMissionsContainer = $ '#showcased-missions'
-  listedMissions = listedMissionsContainer.find('.missions')
-  showcasedMissions = showcasedMissionsContainer.find('.missions')
-  missionsFlagContainers = listedMissionsContainer.find('.flag')
+  missionsContainer = $ '#missions'
+  listedMissionsContainer = $ '#listed-missions', missionsContainer
+  showcasedMissionsContainer = $ '#showcased-missions', missionsContainer
+  listedMissions = $ '.missions', listedMissionsContainer
+  showcasedMissions = $ '.missions', showcasedMissionsContainer
+  missionsFlagContainers = $ '.flag', listedMissionsContainer
+  missionsSponsorButtons = $ '.sponsor, .unsponsor', missionsContainer
+
+  # TODO: add popovers
+  # TODO: add spin animation
+  # TODO: better notification of successful sponshorship
+  # TODO: move the sponsorship-create-error and sponsorship-destroy-error data attributes to another element so they are not repeated all over the HTML
+  # TODO: update sponshorship on sponsored/listed mission
+  missionsSponsorButtons.click (e) -> 
+    e.preventDefault()
+    $btn = $(this)
+    if $btn.hasClass('sponsor')
+      method = 'POST'
+      error = $btn.data('sponsorship-create-error')
+    else
+      method = 'DELETE'
+      error = $btn.data('sponsorship-destroy-error')
+    $.ajax
+      url: $btn.data('sponsorship-url')
+      type: method
+      dataType: 'json'
+      success: (data) -> 
+        $btn.toggleClass('sponsor unsponsor').find('span').text data.sponsorships
+      error: ->
+        DIALOG.error(error)
 
   # disabled tooltip
   # missionsFlagDropdownContainers = missionsFlagContainers.children('div').first()
@@ -112,6 +137,7 @@ $ ->
     e.preventDefault()
     return if $(this).data 'busy'
     $this = $(this).data 'busy', true
+    # TODO: update spin icon
     $flag = $this.parents('.flag').first().addClass('spin')
     $mission = $this.parents('.mission').first()
     $flag.find('[data-toggle="dropdown"]').click()
