@@ -16,7 +16,7 @@ class Mission < ActiveRecord::Base
 
   belongs_to :category
 
-  has_many :flags
+  has_many :flags, dependent: :destroy
 
   has_many :sponsorships, dependent: :destroy
 
