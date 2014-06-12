@@ -1,4 +1,4 @@
-<p class="actions">
+<p class="actions" data-container="<%= container %>">
   <button class="torches <%= mission.torched_by?(current_user) ? 'activated' : 'activate' %>"
       data-url="<%= mission_torch_path mission %>"
       data-create-error="<%= t 'missions.could_not_award_torch' %>"

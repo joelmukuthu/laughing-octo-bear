@@ -103,10 +103,21 @@ $ ->
   # TODO: add popovers
   # TODO: add spin animation
   # TODO: better notification of successful sponshorship
-  # TODO: update buttons on showcased/listed mission
   missionsActionButtons.click (e) -> 
     e.preventDefault()
     $btn = $(this)
+    return if ($btn.data('busy'))
+    $btn.data 'busy', true
+    $parent = $btn.parent()
+    id = $parent.parents('.mission').first().data('mission-id')
+    class_name = $btn.attr('class').match /(torches|sponsors)/
+    class_name = class_name[1]
+    if listedMissionsContainer.is $parent.data('container')
+      other = showcasedMissionsContainer
+    else
+      other = listedMissionsContainer
+    $otherButton = other.find('.mission[data-mission-id="'+id+'"] .actions .'+class_name)
+    $otherButton.data 'busy', true
     if $btn.hasClass('activated')
       method = 'DELETE'
       error = $btn.data('destroy-error')
@@ -118,9 +129,12 @@ $ ->
       type: method
       dataType: 'json'
       success: (data) -> 
-        $btn.toggleClass('activated activate').find('span').text data.count
+        $btn.add($otherButton).toggleClass('activated activate').find('span').text data.count
       error: ->
         DIALOG.error(error)
+      complete: ->
+        $btn.data 'busy', false
+        $otherButton.data 'busy', false
 
   # disabled tooltip
   # missionsFlagDropdownContainers = missionsFlagContainers.children('div').first()
@@ -139,9 +153,6 @@ $ ->
     $flag = $this.parents('.flag').first().addClass('loading')
     $mission = $this.parents('.mission').first()
     $flag.find('[data-toggle="dropdown"]').click()
-    stopSpinner = ->
-      $this.data 'busy', false
-      $flag.removeClass('loading')
     $.ajax 
       url: $this.data 'url'
       type: $this.data 'method'
@@ -162,7 +173,6 @@ $ ->
           $mission.on 'transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', restackMissions
         else
           restackMissions()
-        stopSpinner()
         if showcasedMissions.length 
           missions = showcasedMissions.find('.mission')
           missions.each (i,v) ->
@@ -188,7 +198,9 @@ $ ->
             return true
       error: ->
         DIALOG.error($this.data('message-flag-error'))
-        stopSpinner()
+      complete: ->
+        $this.data 'busy', false
+        $flag.removeClass('loading')
 
   missionsFlagContainers.find('.cancel').click (e) ->
     e.preventDefault()
