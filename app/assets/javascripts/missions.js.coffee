@@ -137,13 +137,12 @@ $ ->
     e.preventDefault()
     return if $(this).data 'busy'
     $this = $(this).data 'busy', true
-    # TODO: update spin icon
-    $flag = $this.parents('.flag').first().addClass('spin')
+    $flag = $this.parents('.flag').first().addClass('loading')
     $mission = $this.parents('.mission').first()
     $flag.find('[data-toggle="dropdown"]').click()
     stopSpinner = ->
       $this.data 'busy', false
-      $flag.removeClass('spin')
+      $flag.removeClass('loading')
     $.ajax 
       url: $this.data 'url'
       type: $this.data 'method'

@@ -145,6 +145,11 @@ $image-field-height: 200px;
         @extend .glyphicon-flag;
       }
 
+      &.loading div > a {
+        @extend .spin-slow;
+        @extend .glyphicon-refresh;
+      }
+
       li {
         span {
           padding: 3px 10px;

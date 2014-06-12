@@ -48,6 +48,10 @@ body {
   @include animation(spin 400ms infinite linear);
 }
 
+.spin-slow {
+  @include animation(spin 600ms infinite linear);
+}
+
 .fixed-width {
   @extend .container;
 }
