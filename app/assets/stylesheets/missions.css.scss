@@ -218,11 +218,11 @@ $image-field-height: 200px;
         @extend .btn-default;
       }
 
-      .sponsor, .unsponsor {
+      .activate {
         @extend .btn-primary;
       }
 
-      .unsponsor {
+      .activated {
         @extend .btn-success;
       }
 

@@ -1,0 +1,2 @@
+module Mission::TorchesHelper
+end

@@ -18,6 +18,8 @@ class Mission < ActiveRecord::Base
 
   has_many :flags, dependent: :destroy
 
+  has_many :torches, dependent: :destroy
+
   has_many :sponsorships, dependent: :destroy
 
   # record unique visits/views/impressions on an instance of Mission
@@ -32,7 +34,7 @@ class Mission < ActiveRecord::Base
   scope :flagged_by, ->(user) { flagged.where(mission_flags: {user_id: user.id}) }
 
   # TODO: should we also add .references for :category and :owner?
-  default_scope { includes(:category, :owner, :flags, :sponsorships) }
+  default_scope { includes(:category, :owner, :flags, :sponsorships, :torches) }
 
   # using .where on this .includes forces AR to use .references which then translates to:
   # missions which have been flagged but not by this user. that's not what we want. instead we'll
@@ -61,6 +63,17 @@ class Mission < ActiveRecord::Base
     # sponsorship.nil? ? false : true
     self.sponsorships.each do |sponsorship|
       return true if sponsorship.sponsor == user
+    end
+    false
+  end
+
+  def torched_by? user
+    # TODO: run benchmarks. Which is better, loop through all the torches (note these are already loaded 
+    # by the default .includes scope) or send a separate query here
+    # torch = self.torches.find_by torcher: user
+    # torch.nil? ? false : true
+    self.torches.each do |torch|
+      return true if torch.torcher == user
     end
     false
   end

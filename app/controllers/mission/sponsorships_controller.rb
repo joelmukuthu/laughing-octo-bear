@@ -4,8 +4,8 @@ class Mission::SponsorshipsController < ApplicationController
   before_action :ensure_current_user_can_sponsor_mission!, only: :create
   before_action :ensure_current_user_already_sponsors_mission!, only: :destroy
 
-  # POST /missions/:mission_id/sponsorships
-  # POST /missions/:mission_id/sponsorships.json
+  # POST /missions/:mission_id/sponsorship
+  # POST /missions/:mission_id/sponsorship.json
   def create
     if @mission.sponsored_by? current_user
       return respond_to do |format|
@@ -17,18 +17,18 @@ class Mission::SponsorshipsController < ApplicationController
     respond_to do |format|
       # TODO: notification and activity
       format.html { redirect_to mission_path(@mission), notice: t('missions.sponsored_successfully') }
-      format.json { render json: { sponsorships: @mission.sponsorships.count } }
+      format.json { render json: { count: @mission.sponsorships.count } }
     end
   end
 
-  # DELETE /missions/:mission_id/sponsorships
-  # DELETE /missions/:mission_id/sponsorships.json
+  # DELETE /missions/:mission_id/sponsorship
+  # DELETE /missions/:mission_id/sponsorship.json
   def destroy
     sponsorhip = @mission.sponsorships.find_by sponsor: current_user
     sponsorhip.destroy
     respond_to do |format|
       format.html { redirect_to mission_path(@mission) }
-      format.json { render json: { sponsorships: @mission.sponsorships.count } }
+      format.json { render json: { count: @mission.sponsorships.count } }
     end
   end
 

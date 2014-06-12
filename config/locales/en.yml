@@ -57,6 +57,10 @@ en:
     cannot_sponsor_own_mission: You cannot sponsor your own mission.
     already_sponsoring_mission: You are already sponsoring this mission!
     destroy_sponshorship_denied: You are not allowed to perform this action.
+    award_torch: Award a torch to this mission
+    torch_awarded_successfully: Torch awarded!
+    could_not_award_torch: Sorry! This request failed. We've been notified of this error and our developers will work to fix it.
+    could_not_revoke_torch: Sorry! This request failed. We've been notified of this error and our developers will work to fix it.
 
     form:
       new_mission: New mission form

@@ -8,9 +8,9 @@ module Mission::SponsorshipsHelper
   end
 
   def sponsor_button_class mission
-    return 'unsponsor' if mission.sponsored_by? current_user
+    return 'activated' if mission.sponsored_by? current_user
     if can_sponsor_mission? mission
-      'sponsor'
+      'activate'
     else
       'disabled'
     end

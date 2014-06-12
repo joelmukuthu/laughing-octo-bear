@@ -98,28 +98,27 @@ $ ->
   listedMissions = $ '.missions', listedMissionsContainer
   showcasedMissions = $ '.missions', showcasedMissionsContainer
   missionsFlagContainers = $ '.flag', listedMissionsContainer
-  missionsSponsorButtons = $ '.sponsor, .unsponsor', missionsContainer
+  missionsActionButtons = $ '.sponsors, .torches', missionsContainer
 
   # TODO: add popovers
   # TODO: add spin animation
   # TODO: better notification of successful sponshorship
-  # TODO: move the sponsorship-create-error and sponsorship-destroy-error data attributes to another element so they are not repeated all over the HTML
-  # TODO: update sponshorship on sponsored/listed mission
-  missionsSponsorButtons.click (e) -> 
+  # TODO: update buttons on showcased/listed mission
+  missionsActionButtons.click (e) -> 
     e.preventDefault()
     $btn = $(this)
-    if $btn.hasClass('sponsor')
-      method = 'POST'
-      error = $btn.data('sponsorship-create-error')
-    else
+    if $btn.hasClass('activated')
       method = 'DELETE'
-      error = $btn.data('sponsorship-destroy-error')
+      error = $btn.data('destroy-error')
+    else
+      method = 'POST'
+      error = $btn.data('create-error')
     $.ajax
-      url: $btn.data('sponsorship-url')
+      url: $btn.data('url')
       type: method
       dataType: 'json'
       success: (data) -> 
-        $btn.toggleClass('sponsor unsponsor').find('span').text data.sponsorships
+        $btn.toggleClass('activated activate').find('span').text data.count
       error: ->
         DIALOG.error(error)
 

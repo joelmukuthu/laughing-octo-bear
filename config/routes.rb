@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :missions do
     scope module: :mission do 
       resource :sponsorship, only: [:create, :destroy]
+      resource :torch, only: [:create, :destroy]
     end
   end
   match '/missions/:id/flag' => 'missions#flag', via: [:patch, :put], as: :flag_mission
