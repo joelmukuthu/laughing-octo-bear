@@ -107,7 +107,7 @@ $ ->
     e.preventDefault()
     $btn = $(this)
     return if ($btn.data('busy'))
-    $btn.data 'busy', true
+    $btn.addClass('loading').data 'busy', true
     $parent = $btn.parent()
     id = $parent.parents('.mission').first().data('mission-id')
     class_name = $btn.attr('class').match /(torches|sponsors)/
@@ -117,7 +117,7 @@ $ ->
     else
       other = listedMissionsContainer
     $otherButton = other.find('.mission[data-mission-id="'+id+'"] .actions .'+class_name)
-    $otherButton.data 'busy', true
+    $otherButton.addClass('loading').data 'busy', true
     if $btn.hasClass('activated')
       method = 'DELETE'
       error = $btn.data('destroy-error')
@@ -133,8 +133,7 @@ $ ->
       error: ->
         DIALOG.error(error)
       complete: ->
-        $btn.data 'busy', false
-        $otherButton.data 'busy', false
+        $btn.add($otherButton).removeClass('loading').data 'busy', false
 
   # disabled tooltip
   # missionsFlagDropdownContainers = missionsFlagContainers.children('div').first()

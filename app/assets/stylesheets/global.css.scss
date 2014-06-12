@@ -48,7 +48,7 @@ body {
   @include animation(spin 400ms infinite linear);
 }
 
-.spin-slow {
+.slow-spin {
   @include animation(spin 600ms infinite linear);
 }
 

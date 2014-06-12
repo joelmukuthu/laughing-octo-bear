@@ -146,7 +146,7 @@ $image-field-height: 200px;
       }
 
       &.loading div > a {
-        @extend .spin-slow;
+        @extend .slow-spin;
         @extend .glyphicon-refresh;
       }
 
@@ -207,6 +207,11 @@ $image-field-height: 200px;
 
         &:focus:active, &:focus, &:active {
           outline: 0;
+        }
+
+        &.loading i {
+          @extend .glyphicon-refresh;
+          @extend .slow-spin;
         }
       }
 
