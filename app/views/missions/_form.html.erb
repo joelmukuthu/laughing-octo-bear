@@ -63,7 +63,7 @@
       <div class="radio_label"><%= t('missions.form.who_can_sponsor') %></div>
       <label class="first">
         <%= f.radio_button :who_can_sponsor, Mission::ANYONE_CAN_SPONSOR, { checked: @mission.who_can_sponsor != Mission::ONLY_INVITED_FRIENDS_CAN_SPONSOR } %>
-        <%= t('missions.form.anyone_can_sponsor') %>
+        <%= t('missions.form.anyone_can_sponsor', site_name: Rails.application.config.site_name) %>
       </label>
       <label class="second">
         <%= f.radio_button :who_can_sponsor, Mission::ONLY_INVITED_FRIENDS_CAN_SPONSOR %>
@@ -75,7 +75,7 @@
       <div class="radio_label"><%= t('missions.form.who_can_see_my_name') %></div>
       <label class="first">
         <%= f.radio_button :who_can_see_my_name, Mission::ANYONE_CAN_SEE_MY_NAME, { checked: @mission.who_can_see_my_name != Mission::ONLY_SPONSORS_CAN_SEE_MY_NAME } %>
-        <%= t('missions.form.anyone_can_see_my_name') %>
+        <%= t('missions.form.anyone_can_see_my_name', site_name: Rails.application.config.site_name) %>
       </label>
       <label class="second">
         <%= f.radio_button :who_can_see_my_name, Mission::ONLY_SPONSORS_CAN_SEE_MY_NAME %>
@@ -84,7 +84,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit t('missions.form.update') %>
     </div>
   <% end %>
 </div>

@@ -21,5 +21,7 @@ module Liberify
     # config.i18n.default_locale = :de
 
     # config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+
+    config.site_name = 'Liberify'
   end
 end
