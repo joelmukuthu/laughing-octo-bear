@@ -16,6 +16,7 @@
             <%= render 'mission_title_and_info', mission: mission %>
           </div>
           <div class="bottom">
+            <% # TODO: don't show full reason by default %>
             <% if mission.reason? %>
             <p><%= mission.reason %></p>
             <% end %>
@@ -89,6 +90,7 @@
 
           <%= render 'mission_actions', mission: mission, container: '#listed-missions' %>
 
+          <% # TODO: don't show full reason by default %>
           <% if mission.reason? %>
           <p class="reason"><%= mission.reason %></p>
           <% end %>

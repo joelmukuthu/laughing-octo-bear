@@ -6,6 +6,7 @@ class MissionsController < ApplicationController
   before_action :set_categories, only: [:new, :edit]
 
   # TODO: I18n flash messages
+  # TODO: sending sponsorship invitations
 
   # GET /missions
   # GET /missions.json
