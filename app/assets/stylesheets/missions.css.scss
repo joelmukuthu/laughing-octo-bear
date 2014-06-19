@@ -30,6 +30,8 @@ $image-field-height: 200px;
     max-width: 1920px;
     padding: 0;
     margin-bottom: 40px;
+    border: $single-mission-border;
+    border-width: 1px 0;
 
     // > ol {
     //   @extend .carousel-indicators;
