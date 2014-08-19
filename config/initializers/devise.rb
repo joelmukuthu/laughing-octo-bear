@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = '70672bb772727b644e9a9c67b4ae0a3fcafbe01b66b8da1b850b5651832a6e7f5eeef76039e2b4741b069d820a01e2fc223f1c89e66d83fd2fcc0de0a73f1695'
+  config.secret_key = Rails.application.secrets.devise_secret_key
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -230,9 +230,9 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :facebook, '880263821999011', '657d6280b5fa0861736068ea022ce939'
-  config.omniauth :twitter, 'hlpYiJ4O6y4KUNgpB8ioKreIv', 'quwdV4T2SMswulMcvtqVleOMsjKSSM2Mi9BJZMVcpvWi9a00gn'
-  config.omniauth :linkedin, '75ckmiz6dn856m', 'dwZyKX8kQFUU6haO'
+  config.omniauth :facebook, Rails.application.secrets.facebook_app_id, Rails.application.secrets.facebook_app_secret
+  config.omniauth :twitter, Rails.application.secrets.twitter_app_id, Rails.application.secrets.twitter_app_secret
+  config.omniauth :linkedin, Rails.application.secrets.linkedin_app_id, Rails.application.secrets.linkedin_app_secret
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
